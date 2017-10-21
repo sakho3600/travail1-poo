@@ -1,0 +1,15 @@
+[
+	{	
+		"ID":"E1",
+		"Name":"Stilmant Julien",
+		"Date":"21/07/1996",
+		"Salaire":35000
+		 },
+	 {	
+		"ID":"E2",
+		"Name":"Thierry Frycia",
+		"Date":"15/5/1996",
+		"Salaire":65000
+		}
+		]
+				

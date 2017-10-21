@@ -2,22 +2,17 @@
 using System.IO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using travail1poo;
 
 namespace gestion
 {
-    public class User
-    {
-        public string name { get; set; }
-        public int id { get; set; }
-        public string screen_name { get; set; }
-    }
+
 
     public class RootObject
-    {
-        public string text { get; set; }
-        public long id { get; set; }
-        public User user { get; set; }
-        public object in_reply_to_screen_name { get; set; }
+    {   public string ID { get; set; }
+        public string Name { get; set; }
+        public string Date { get; set; }
+        public float Salaire { get; set; }
 
     }
 
@@ -25,13 +20,23 @@ namespace gestion
     {
         public static void Main(string[] args)
         {
-            string data = System.IO.File.ReadAllText(@"data.json");
+            string data = System.IO.File.ReadAllText(@"dataemployé.json");
+            Traduction(data);
+            Console.ReadKey();
+        }
 
+        static void Traduction(string data)
+        {
             var h = JsonConvert.DeserializeObject<List<RootObject>>(data);
+            int count = h.Count;
+            for(int i=0;i<count;i++)
+            {
+                Employé h[i].ID = new Employé(h[i].Name, h[i].Date, h[i].Salaire);
+            }
 
-            Console.WriteLine(h[0].text);
-            Console.WriteLine(h[1].user.screen_name);
+
 
         }
     }
+    
 }
