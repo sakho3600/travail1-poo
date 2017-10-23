@@ -33,9 +33,6 @@ namespace gestion
             {
                 Employé h[i].ID = new Employé(h[i].Name, h[i].Date, h[i].Salaire);
             }
-
-
-
         }
     }
     
