@@ -38,8 +38,9 @@
     <Compile Include="Consultant.cs" />
     <Compile Include="Directeur.cs" />
     <Compile Include="Employé.cs" />
-    <Compile Include="Manageur.cs" />
     <Compile Include="Entreprise.cs" />
+    <Compile Include="Manageur.cs" />
+    <Compile Include="Execution.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Societe.cs" />
   </ItemGroup>

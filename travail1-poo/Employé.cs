@@ -10,17 +10,24 @@ namespace travail1poo
 {
     class Employé
     {
-        public Dictionary<string, object> Emploi;
+        public string Name;
+        public string Date;
+        public float Salaire;
 
-        public Employé()
+        public Employé(string a, string b, float c)
         {
-            this.Emploi = new Dictionary<string, object>;
+            this.Name = a;
+            this.Date = b;
+            this.Salaire = c;
         }
-        public encode(string a, object b)
+        public string encode()
         {
-            Emploi.Add(a, b);
+            return string.Format("{0}", Name);
         }
-        
+        public override string ToString()
+        {
+            return string.Format("{0}\n{1}\n{2}",this.Name,this.Date,this.Salaire);
+        }
 
 
     }
