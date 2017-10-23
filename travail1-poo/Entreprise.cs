@@ -40,7 +40,7 @@ namespace gestion
         static Dictionary<string,object> Emploi()
         {
             Dictionary<string, object> ListEmploi = new Dictionary<string, object>();
-            string data = System.IO.File.ReadAllText(@"dataemployé.json");
+            string data = System.IO.File.ReadAllText(@"Dataemployé.json");
             var h = JsonConvert.DeserializeObject<List<DataEmploye>>(data);
             int count = h.Count;
             for (int i = 0; i < count; i++)
@@ -55,7 +55,7 @@ namespace gestion
         static List<string> LectureName()
         {
             List<string> ListName = new List<string>();
-            string data = System.IO.File.ReadAllText(@"dataemployé.json");
+            string data = System.IO.File.ReadAllText(@"Dataemployé.json");
             var h = JsonConvert.DeserializeObject<List<DataEmploye>>(data);
             int cont = h.Count;
             for (int i = 0; i < cont; i++)
@@ -92,6 +92,5 @@ namespace gestion
             return Adresse;
             
         }
-    }
-    
+    }   
 }
