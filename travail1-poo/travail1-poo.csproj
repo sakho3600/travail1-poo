@@ -35,9 +35,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consultant.cs" />
+    <Compile Include="Directeur.cs" />
     <Compile Include="Employé.cs" />
+    <Compile Include="Manageur.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Societe.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

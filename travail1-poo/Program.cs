@@ -28,10 +28,7 @@ namespace gestion
         {   
             Dictionary<string, string> Ad = Traduction(LectureName(),LectureAdress());
             foreach (KeyValuePair<string, string> kvp in Ad)
-            {
-                Console.WriteLine("Key = {0}, Value = {1}",
-                    kvp.Key, kvp.Value);
-            }
+
             Console.ReadKey();
         }
 

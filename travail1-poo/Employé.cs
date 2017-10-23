@@ -27,45 +27,6 @@ namespace travail1poo
 
     }
 
-    class Directeur : Employé
-    {
-        public List<Manageur> Manag;
-        public List<Consultant> Consult;
-
-        public Directeur (string Name, string Date, float Salaire, List<Manageur> Manag, List<Consultant> Consult):base(Name, Date, Salaire)
-        {
-            this.Manag = Manag;
-            this.Consult = Consult;
-
-
-        }
-
-
-    }
-    class Manageur : Employé
-    {
-        public List<Consultant> Consult;
-
-        public Manageur (string Name, string Date, float Salaire,List<Consultant>Consult):base(Name, Date, Salaire)
-        {
-            this.Consult = Consult;
-        }
-    }
-    class Consultant : Employé
-    {
-        public Societe s;
-        public List<string> Clientint;
-        public List<string> Clientext;
-
-        public Consultant(string Name, string Date, float Salaire, List<string> Clientint, List<string> Clientext, Societe s) : base(Name, Date, Salaire)
-        {
-            this.s = s;
-        }
-    }
-    class Societe
-    {
-
-    }
 
 }
 
