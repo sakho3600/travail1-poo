@@ -9,7 +9,7 @@ namespace gestion
 
 
     public class DataEmploye
-    {   public string ID { get; set; }
+    {   public string Poste { get; set; }
         public string Name { get; set; }
         public string Date { get; set; }
         public float Salaire { get; set; }
@@ -27,9 +27,29 @@ namespace gestion
         public static void Main(string[] args)
         {   
             Dictionary<string, string> Ad = Traduction(LectureName(),LectureAdress());
-            foreach (KeyValuePair<string, string> kvp in Ad)
+            Dictionary<string, object> Pos = Emploi();
+            foreach (KeyValuePair<string, object> kvp in Pos)
+            {
+                Console.WriteLine("Key = {0}, Value = {1}",
+                    kvp.Key, kvp.Value);
+            }
 
             Console.ReadKey();
+        }
+
+        static Dictionary<string,object> Emploi()
+        {
+            Dictionary<string, object> ListEmploi = new Dictionary<string, object>();
+            string data = System.IO.File.ReadAllText(@"dataemployé.json");
+            var h = JsonConvert.DeserializeObject<List<DataEmploye>>(data);
+            int count = h.Count;
+            for (int i = 0; i < count; i++)
+            {
+
+                Employé employe = new Employé(h[i].Name, h[i].Date, h[i].Salaire);
+                ListEmploi.Add(employe.encode(), employe);
+            }
+            return ListEmploi;
         }
 
         static List<string> LectureName()

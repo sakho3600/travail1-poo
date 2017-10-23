@@ -16,7 +16,7 @@ namespace travail1poo
 {
     class Directeur:Employé
     {
-        {
+        
         public List<Manageur> Manag;
         public List<Consultant> Consult;
 
@@ -24,11 +24,12 @@ namespace travail1poo
         {
             this.Manag = Manag;
             this.Consult = Consult;
-
-
         }
+
+
+        
 
 
     }
 }
-}
+
