@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,8 +22,13 @@ namespace travail1poo
             this.Emploi.Add(a, b);
         }
 
+<<<<<<< HEAD
         public Dictionary<string, string> Personnel()
 
+=======
+        public string ListePersonnel()
+            
+>>>>>>> 37d05a27032ae43378fe838c333f9c5f818f5ea4
         {
             Dictionary<string, string> ListePersonnel = new Dictionary<string, string>();
             
@@ -32,6 +37,7 @@ namespace travail1poo
                 if (kvp.Value is Consultant)
                 {
                     Consultant consul = (Consultant)kvp.Value;
+<<<<<<< HEAD
                     ListePersonnel.Add(kvp.Key, consul.Poste());
                 }
                 else if (kvp.Value is Manageur)
@@ -43,6 +49,38 @@ namespace travail1poo
                 {
                     Directeur dir = (Directeur)kvp.Value;
                     ListePersonnel.Add(kvp.Key, dir.Poste());
+=======
+                    Console.WriteLine(consul.Poste());
+                }
+                else if (kvp.Value is Employé)
+                {
+                    Employé empl = (Employé)kvp.Value;
+                    Console.WriteLine(empl.encode());
+                }
+			}
+            return tot;
+        }
+
+        public Dictionary<string, object> Emploi;
+
+        public Entreprise(Dictionary<string, object> ListeEmploi)
+        {
+            this.Emploi = ListeEmploi;
+        }
+        public void Encode(string a, object b)
+        {
+            this.Emploi.Add(a, b);
+        }
+        public string ListePersonnel()
+            
+        {
+            string tot = "";
+            foreach (KeyValuePair<string, object> kvp in Emploi)
+            {                
+                try
+                {   
+                   tot += String.Format("Key = {0}, Value = {1}\n", kvp.Key, kvp.Value);
+>>>>>>> 37d05a27032ae43378fe838c333f9c5f818f5ea4
                 }
                 else
                 {
@@ -51,6 +89,7 @@ namespace travail1poo
             }
             return ListePersonnel;
         }
+<<<<<<< HEAD
         public override string ToString()
 
         {
@@ -62,6 +101,8 @@ namespace travail1poo
             return tot;
                 
         }
+=======
+>>>>>>> 37d05a27032ae43378fe838c333f9c5f818f5ea4
     }
 }
       
