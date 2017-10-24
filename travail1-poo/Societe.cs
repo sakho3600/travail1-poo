@@ -8,5 +8,6 @@ namespace travail1poo
 {
     class Societe
     {
+        
     }
 }

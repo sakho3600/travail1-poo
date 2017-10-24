@@ -8,13 +8,17 @@ namespace travail1poo
 {
     class Consultant : Employé
     {
-        public Societe s;
-        public List<string> Clientint;
-        public List<string> Clientext;
+        //public Societe s;
+        public string Client;
 
-        public Consultant(string Name, string Date, float Salaire, List<string> Clientint, List<string> Clientext, Societe s) : base(Name, Date, Salaire)
+        public Consultant(string Name, string Date, float Salaire, string Client) : base(Name, Date, Salaire)
         {
-            this.s = s;
+            this.Client = Client;
+
+        }
+        public override string ToString()
+        {
+            return string.Format("{0}\n{1}\n{2}\n{3}", this.Name, this.Date, this.Salaire,this.Client);
         }
     }
 }
