@@ -16,6 +16,10 @@ namespace travail1poo
             this.Client = Client;
 
         }
+        public string Poste()
+        {
+            return "Consultant";
+        }
         public override string ToString()
         {
             return string.Format("{0}\n{1}\n{2}\n{3}", this.Name, this.Date, this.Salaire,this.Client);

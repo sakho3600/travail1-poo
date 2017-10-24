@@ -3,16 +3,19 @@ using System.IO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using travail1poo;
+using gestion;
 
 namespace gestion
 {
-
 
     public class DataEmploye
     {   public string Poste { get; set; }
         public string Name { get; set; }
         public string Date { get; set; }
         public float Salaire { get; set; }
+        public List<string> Associe { get; set; }
+    }
+
 
     }
     public class DataClient
@@ -28,14 +31,14 @@ namespace gestion
         {   
             Dictionary<string, string> Ad = Traduction(LectureName(),LectureAdress());
             Entreprise Ecam = new Entreprise(Emploi());
-            Console.WriteLine(Ecam.ListePersonnel());
+            Ecam.Personnel();
             Console.ReadKey();
         }
 
         static Dictionary<string,object> Emploi()
         {
             Dictionary<string, object> ListEmploi = new Dictionary<string, object>();
-            string data = System.IO.File.ReadAllText(@"dataemployé.json");
+            string data = System.IO.File.ReadAllText(@"Dataemployé.json");
             var h = JsonConvert.DeserializeObject<List<DataEmploye>>(data);
             int count = h.Count;
             Dictionary<string, string> Trad = Traduction(LectureName(),LectureAdress());
@@ -50,22 +53,24 @@ namespace gestion
                         Consultant consultant = new Consultant(h[i].Name, h[i].Date, h[i].Salaire, Data);
                         ListEmploi.Add(h[i].Name, consultant);
                         break;
+                case "Manageur":
+                    Manageur manageur = new Manageur()
                     default:
                         Employé employé = new Employé(h[i].Name, h[i].Date, h[i].Salaire);
                         ListEmploi.Add(h[i].Name, employé);
                         break;
+                }
+            }
+
+            return ListEmploi;
 
                 }
 
-            }
-            return ListEmploi;
- 
-        }
 
         static List<string> LectureName()
         {
             List<string> ListName = new List<string>();
-            string data = System.IO.File.ReadAllText(@"dataemployé.json");
+            string data = System.IO.File.ReadAllText(@"Dataemployé.json");
             var h = JsonConvert.DeserializeObject<List<DataEmploye>>(data);
             int cont = h.Count;
             for (int i = 0; i < cont; i++)
@@ -88,7 +93,6 @@ namespace gestion
             return ListAdress;
 
         }
-
         static Dictionary<string,string>Traduction(List<string> ListName, List<string> ListAdress)
         {
             string a = System.IO.File.ReadAllText(@"Dataadress.json");
@@ -99,9 +103,9 @@ namespace gestion
             {
                 Adresse.Add(ListName[i], ListAdress[i]);
             }
+
             return Adresse;
-            
         }
     }
     
-}
+

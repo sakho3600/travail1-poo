@@ -20,7 +20,8 @@ namespace travail1poo
             this.Date = b;
             this.Salaire = c;
         }
-        public string encode()
+
+        public string Encode()
         {
             return string.Format("{0}", Name);
         }
@@ -28,11 +29,7 @@ namespace travail1poo
         {
             return string.Format("{0}\n{1}\n{2}",this.Name,this.Date,this.Salaire);
         }
-
-
     }
-
-
 }
 
 
