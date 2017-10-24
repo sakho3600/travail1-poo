@@ -20,11 +20,23 @@ namespace travail1poo
             this.Date = b;
             this.Salaire = c;
         }
+<<<<<<< HEAD
 
         public string encode()
         {
             return string.Format("{0}", Name);
         }
+=======
+        public string encode()
+        {
+            return string.Format("{0}", Name);
+        }
+        public override string ToString()
+        {
+            return string.Format("{0}\n{1}\n{2}",this.Name,this.Date,this.Salaire);
+        }
+
+>>>>>>> 33d999743500e715d47ace360cc34679bfe56a7e
 
         public override string ToString()
         {
