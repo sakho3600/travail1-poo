@@ -16,43 +16,49 @@ namespace travail1poo
     {
         //public Societe s;
         public string Client;
-        public List<string> manageur;
+        public string manageur;
 
         public Consultant(string Name, string Date, float Salaire,List<string> manageur, string Client) : base(Name, Date, Salaire)
         {
             this.Client = Client;
-            this.manageur = manageur;
+            this.manageur = manageur[0];
 
         }
         public string Poste()
         {
             return "Consultant";
         }
-        private Dictionary<string,List<DateTime> >Horaire()
+        private Dictionary<string,Dictionary<string,List<DateTime>>>Horaire()
         {
             var h = JsonConvert.DeserializeObject<List<DataClient>>(this.Client);
             int a = h.Count;
-            Dictionary<string, List<DateTime>> l = new Dictionary<string, List<DateTime>>();
-            List<DateTime> k = new List<DateTime>();
-            TimeSpan e;
+            Dictionary < string,Dictionary < string,List<DateTime> >> l = new Dictionary<string, Dictionary<string,List< DateTime>>> ();
             for (int i = 0; i < a; i++)
             {
 
                 if (h[i].Name == "Interne")
                 {
+                    Dictionary<string, List<DateTime>> k = new Dictionary<string, List<DateTime>>();
+                    List<DateTime> p = new List<DateTime>();
                     DateTime c = Convert.ToDateTime(h[i].DateStart);
                     DateTime d = Convert.ToDateTime(h[i].DateEnd);
-                    e = d - c;
-
+                    string nom = String.Format("{0} {1}", h[i].Name, i);
+                    p.Add(c);
+                    p.Add(d);
+                    k["Interne"] = p;
+                    l[nom ]= k;
                 }
                 else
                 {
+                    Dictionary<string, List<DateTime>> k = new Dictionary<string, List<DateTime>>();
                     List<DateTime> b = new List<DateTime>();
                     DateTime c = Convert.ToDateTime(h[i].DateStart);
                     DateTime d = Convert.ToDateTime(h[i].DateEnd);
                     b.Add(c);
                     b.Add(d);
-                    l[h[i].Name] = b;
+                    k["externe"] = b;
+                    l[h[i].Name] = k;
+
                 }
 
 
@@ -60,13 +66,42 @@ namespace travail1poo
             }
             return l;
         }
+        private float CalculSalaireTotal()
+        {
+            int CompteurMission = 0;
+            int CompteurInterne=0;
+            foreach (KeyValuePair<string, Dictionary<string, List<DateTime>>> kvp in Horaire())
+            {
+                foreach (KeyValuePair<string, List<DateTime>> lol in kvp.Value)
+                {
+                    if (lol.Key is "externe")
+                    {
+                        CompteurMission++;
+                    }
+                    else if (lol.Key is "interne")
+                    {
+                        TimeSpan sub = lol.Value[1] - lol.Value[0];
+                        string a = String.Format("{}", sub);
+                        CompteurInterne += Int32.Parse(a);
+                    }
+                }
+            }
+
+
+        return 0;
+        }
         public string Agenda()
         {
             string tot = "";
-            foreach (KeyValuePair<string, List<DateTime>> kvp in Horaire())
+            foreach (KeyValuePair<string, Dictionary<string, List<DateTime>>> kvp in Horaire())
             {
+                foreach (KeyValuePair<string, List<DateTime>> lol in kvp.Value)
+                {
+                    tot += String.Format("{0}:{1}:{2} au {3}\n", kvp.Key, lol.Key, lol.Value[0], lol.Value[1]);
 
-                    tot += String.Format("{0}:({1}-{2})\n", kvp.Key, kvp.Value[1],kvp.Value[0]);
+                }
+
+
             }
             return tot;
         }

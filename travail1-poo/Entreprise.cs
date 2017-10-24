@@ -33,7 +33,6 @@ namespace travail1poo
                 {
                     Consultant consul = (Consultant)kvp.Value;
                     ListePersonnel.Add(kvp.Key, consul.Poste());
-                    Console.WriteLine(consul.Agenda());
                 }
                 else if (kvp.Value is Manageur)
                 {
