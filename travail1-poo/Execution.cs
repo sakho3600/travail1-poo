@@ -31,7 +31,7 @@ class MainClass
     {
         Dictionary<string, string> Ad = Traduction(LectureName(), LectureAdress());
         Entreprise Ecam = new Entreprise(Emploi());
-        Console.WriteLine(Ecam);
+        Console.WriteLine(Ecam.Personnel());
         Console.ReadKey();
     }
 

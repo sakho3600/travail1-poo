@@ -23,7 +23,7 @@ namespace travail1poo
         }
         public string Poste()
         {
-            return String.Format("Directeur");
+            return String.Format("Directeur {0}",fonction[0]);
         }
     }
 }
