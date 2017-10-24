@@ -33,15 +33,34 @@ namespace travail1poo
                 {
                     Consultant consul = (Consultant)kvp.Value;
                     ListePersonnel.Add(kvp.Key, consul.Poste());
-                    Console.WriteLine(consul.Poste());
                 }
-                else if (kvp.Value is Employé)
+                else if (kvp.Value is Manageur)
                 {
-                    Employé empl = (Employé)kvp.Value;
-                    Console.WriteLine(empl.Encode());
+                    Manageur manag = (Manageur)kvp.Value;
+                    ListePersonnel.Add(kvp.Key, manag.Poste());
+                }
+                else if(kvp.Value is Directeur)
+                {
+                    Directeur dir = (Directeur)kvp.Value;
+                    ListePersonnel.Add(kvp.Key, dir.Poste());
+                }
+                else
+                {
+                    Console.WriteLine("Erreur dans la database");
                 }
             }
+            return ListePersonnel;
+        }
+        public override string ToString()
+
+        {
+            string tot = "";
+            foreach (KeyValuePair<string, string> kvp in Personnel())
+            {
+                tot+= String.Format("{0}:{1}\n",kvp.Key,kvp.Value);
+            }
             return tot;
+                
         }
     }
 }

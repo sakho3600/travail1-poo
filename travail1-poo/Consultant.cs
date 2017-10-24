@@ -10,10 +10,12 @@ namespace travail1poo
     {
         //public Societe s;
         public string Client;
+        public List<string> manageur;
 
-        public Consultant(string Name, string Date, float Salaire, string Client) : base(Name, Date, Salaire)
+        public Consultant(string Name, string Date, float Salaire,List<string> manageur, string Client) : base(Name, Date, Salaire)
         {
             this.Client = Client;
+            this.manageur = manageur;
 
         }
         public string Poste()

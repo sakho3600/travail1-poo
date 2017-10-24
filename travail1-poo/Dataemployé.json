@@ -3,56 +3,56 @@
 		"Name":"Kirstein Julien",
 		"Date":"12/07/1996",
 		"Salaire":150000,
-        "Associé"=["Null"];
-		 }
-    {	"Poste":"Directeur RH",
+        "Associé":["Principal"]
+		 },
+    {	"Poste":"Directeur",
 		"Name":"Stilmant Julien",
 		"Date":"21/07/1996",
 		"Salaire":150000,
-        "Associé"=["Null"];
+        "Associé":["Finance"]
 		 },
-	 {	"Poste":"Directeur RH",
+	 {	"Poste":"Directeur",
 		"Name":"Thierry Frycia",
 		"Date":"15/5/1996",
 		"Salaire":150000,
-        "Associé"=["Null"];
+        "Associé":["RH"]
 		},
 	{	"Poste":"Manageur",
 		"Name":"Maxime Bourguignon",
 		"Date":"12/04/1996",
 		"Salaire":60000,
-        "Associé"=["Manu Gylins"];
+        "Associé":["Manu Gylins"]
 		},
 	{	"Poste":"Manageur",
 		"Name":"Aline Balant",
 		"Date":"10/07/1996",
 		"Salaire":60000,
-        "Associé"=["Jean François","Max Communiste","Louis Herbert"];
+        "Associé":["Jean François","Max Communiste","Louis Herbert"]
 		},
 	{	"Poste":"Consultant",
 		"Name":"Jean François",
 		"Date":"22/10/1994",
 		"Salaire":35000,
-        "Associé"=["Aline Balant"];
+        "Associé":["Aline Balant"]
         
 		},
 	{	"Poste":"Consultant",
 		"Name":"Max Communiste",
 		"Date":"22/09/1995",
 		"Salaire":35000,
-        "Associé"=["Aline Balant"];
+        "Associé":["Aline Balant"]
 		},
 	{	"Poste":"Consultant",
 		"Name":"Louis Herbert",
 		"Date":"18/08/1996",
 		"Salaire":35000,
-        "Associé"=["Aline Balant"];
+        "Associé":["Aline Balant"]
 		},
 	{	"Poste":"Consultant",
 		"Name":"Manu Gylins",
 		"Date":"25/05/1994",
 		"Salaire":35000,
-        "Associé"=["Maxime Bourguignon"];
+        "Associé":["Maxime Bourguignon"]
 		}
 		]
 				

@@ -31,7 +31,7 @@ namespace gestion
         {   
             Dictionary<string, string> Ad = Traduction(LectureName(),LectureAdress());
             Entreprise Ecam = new Entreprise(Emploi());
-            Ecam.Personnel();
+            Console.WriteLine(Ecam);
             Console.ReadKey();
         }
 
@@ -50,11 +50,20 @@ namespace gestion
                 switch (h[i].Poste)
                 {
                     case "Consultant":
-                        Consultant consultant = new Consultant(h[i].Name, h[i].Date, h[i].Salaire, Data);
+                        Consultant consultant = new Consultant(h[i].Name, h[i].Date, h[i].Salaire, h[i].Associe,Data);
                         ListEmploi.Add(h[i].Name, consultant);
                         break;
-                case "Manageur":
-                    Manageur manageur = new Manageur()
+
+                    case "Manageur":
+                        Manageur manageur = new Manageur(h[i].Name,h[i].Date,h[i].Salaire,h[i].Associe);
+                        ListEmploi.Add(h[i].Name, manageur);
+                        break;
+
+                    case "Directeur":
+                        Directeur directeur = new Directeur(h[i].Name, h[i].Date, h[i].Salaire, h[i].Associe);
+                        ListEmploi.Add(h[i].Name, directeur);
+                        break;
+
                     default:
                         Employé employé = new Employé(h[i].Name, h[i].Date, h[i].Salaire);
                         ListEmploi.Add(h[i].Name, employé);

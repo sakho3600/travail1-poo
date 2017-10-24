@@ -10,11 +10,11 @@ namespace travail1poo
 {
     class Manageur : Employé
     {
-        public List<Consultant> Consult;
+        public List<string> Consult;
 
-        public Manageur(string Name, string Date, float Salaire) : base(Name, Date, Salaire)
+        public Manageur(string Name, string Date, float Salaire, List<string> consultant) : base(Name, Date, Salaire)
         {
-            this.Consult = Consult;
+            this.Consult = consultant;
         }
         public string Poste()
         {
