@@ -27,10 +27,19 @@ namespace travail1poo
         {
             return "Manageur";
         }
-        public Dictionary<string,string> GetListConsultant()
+        public List<string> Esclave()
         {
-            Dictionary<string, string> ListConsultant = new Dictionary<string, string>();
+            return this.Consult;
+        }
+        public string GetListConsultant(List<string> agenda)
+        {
+            string ListConsultant = "";
+            for(int i=0; i<agenda.Count; i++)
+            {
+                ListConsultant +=String.Format("{0}\n",agenda[i]);
+            }
             return ListConsultant;
+            
         }
     }
 }

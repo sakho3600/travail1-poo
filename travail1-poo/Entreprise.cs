@@ -51,6 +51,44 @@ namespace travail1poo
 			}
             return ListePersonnel;
         }
+        public string SetlistConsultant(string ManageurName)
+        {
+            List<string> ListConsultant = new List<string>();
+            if(Emploi[ManageurName] is Manageur)
+            {
+                Manageur manag = (Manageur)Emploi[ManageurName];
+                List<string> a = new List<string>(manag.Esclave());
+                for (int i = 0; i < a.Count; i++)
+                {
+                    foreach (KeyValuePair<string, object> kvp in Emploi)
+                    {
+                        if (kvp.Key == a[i])
+                        {
+                            Consultant consul = (Consultant)kvp.Value;
+                            ListConsultant.Add(consul.Agenda(DateTime.Today));
+
+                        }
+                    }
+                }
+                return manag.GetListConsultant(ListConsultant);
+
+            }
+            else
+            {
+                string texte = "Erreur vous n'avez pas mis le nom d'un manageur\n Voici la liste de nos manageur:\n";
+                foreach (KeyValuePair<string, string> kvp in Personnel())
+                {
+                    if (kvp.Value == "Manageur")
+                    {
+                        texte += String.Format("{}", kvp.Key);
+                    }
+                }
+                return texte;
+
+
+            }
+
+        }
 
         public override string ToString()
 

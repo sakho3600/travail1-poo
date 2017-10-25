@@ -17,9 +17,11 @@ namespace travail1poo
         //public Societe s;
         public string Client;
         public string manageur;
+        private string Name;
 
         public Consultant(string Name, string Date, float Salaire,List<string> manageur, string Client) : base(Name, Date, Salaire)
         {
+            this.Name = Name;
             this.Client = Client;
             this.manageur = manageur[0];
 
@@ -90,14 +92,17 @@ namespace travail1poo
 
         return 0;
         }
-        public string Agenda()
+        public string Agenda(DateTime dateTime)
         {
             string tot = "";
             foreach (KeyValuePair<string, Dictionary<string, List<DateTime>>> kvp in Horaire())
             {
                 foreach (KeyValuePair<string, List<DateTime>> lol in kvp.Value)
                 {
-                    tot += String.Format("{0}:{1}:{2} au {3}\n", kvp.Key, lol.Key, lol.Value[0], lol.Value[1]);
+                    if(dateTime>lol.Value[0]&& dateTime < lol.Value[1])
+                    {
+                        tot += String.Format("{0}:{1}:{2}:{3} au {4}", this.Name, kvp.Key, lol.Key, lol.Value[0], lol.Value[0]);
+                    }
 
                 }
 
