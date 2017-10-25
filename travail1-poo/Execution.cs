@@ -31,7 +31,9 @@ class MainClass
     {
         Dictionary<string, string> Ad = Traduction(LectureName(), LectureAdress());
         Entreprise Ecam = new Entreprise(Emploi());
-        Console.WriteLine(Ecam.SetlistConsultant("Aline Balant"));
+        Console.WriteLine(Ecam);
+        Console.WriteLine(Ecam.SetListEntreprise("Thales"));
+        Console.WriteLine(Ecam.SetListConsultant("Aline Balant"));
         Console.ReadKey();
     }
 
@@ -60,9 +62,31 @@ class MainClass
                     break;
 
                 case "Directeur":
-                    Directeur directeur = new Directeur(h[i].Name, h[i].Date, h[i].Salaire, h[i].Associe);
-                    ListEmploi.Add(h[i].Name, directeur);
-                    break;
+                    if (h[i].Associe[0] == "Principal")
+                    {
+                        Directeur directeur = new Directeur(h[i].Name, h[i].Date, h[i].Salaire,h[i].Associe);
+                        ListEmploi.Add(h[i].Name, directeur);
+                        break;
+                    }
+                    else if(h[i].Associe[0] == "RH")
+                    {
+                        Directeur_RH directeur = new Directeur_RH(h[i].Name, h[i].Date, h[i].Salaire,h[i].Associe);
+                        ListEmploi.Add(h[i].Name, directeur);
+                        break;
+
+                    }
+                    else if (h[i].Associe[0] == "Finance")
+                    {
+                        Finance directeur = new Finance(h[i].Name, h[i].Date, h[i].Salaire,h[i].Associe);
+                        ListEmploi.Add(h[i].Name, directeur);
+                        break;
+
+                    }
+                    else
+                    {
+                        break;
+                    }
+
 
                 default:
                     Employé employé = new Employé(h[i].Name, h[i].Date, h[i].Salaire);

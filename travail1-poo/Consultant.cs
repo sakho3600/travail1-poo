@@ -30,6 +30,10 @@ namespace travail1poo
         {
             return "Consultant";
         }
+        public string Nom()
+        {
+            return this.Name;
+        }
         private Dictionary<string,Dictionary<string,List<DateTime>>>Horaire()
         {
             var h = JsonConvert.DeserializeObject<List<DataClient>>(this.Client);
@@ -101,7 +105,25 @@ namespace travail1poo
                 {
                     if(dateTime>lol.Value[0]&& dateTime < lol.Value[1])
                     {
-                        tot += String.Format("{0}:{1}:{2}:{3} au {4}", this.Name, kvp.Key, lol.Key, lol.Value[0], lol.Value[0]);
+                        tot += String.Format("{0}:{1}:{2}:{3} au {4}", this.Name, kvp.Key, lol.Key, lol.Value[0], lol.Value[1]);
+                    }
+
+                }
+
+
+            }
+            return tot;
+        }
+        public string Entreprise(string entreprise)
+        {
+            string tot = "";
+            foreach (KeyValuePair<string, Dictionary<string, List<DateTime>>> kvp in Horaire())
+            {
+                foreach (KeyValuePair<string, List<DateTime>> lol in kvp.Value)
+                {
+                    if (kvp.Key == entreprise)
+                    {
+                        tot += String.Format("{0}={1} au {2}", kvp.Key, lol.Value[0], lol.Value[1]);
                     }
 
                 }

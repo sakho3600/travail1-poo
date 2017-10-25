@@ -15,15 +15,15 @@ namespace travail1poo
     {
         public List<Manageur> Manag;
         public List<Consultant> Consult;
-        public List<string> fonction;
+        public string fonction;
 
-        public Directeur(string Name, string Date, float Salaire, List<string>fonction) : base(Name, Date, Salaire)
+        public Directeur(string Name, string Date, float Salaire, List<string> fonction) : base(Name, Date, Salaire)
         {
-            this.fonction = fonction;
+            this.fonction = fonction[0];
         }
         public string Poste()
         {
-            return String.Format("Directeur {0}",fonction[0]);
+            return String.Format("Directeur {0}",fonction);
         }
     }
 }

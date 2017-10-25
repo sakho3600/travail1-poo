@@ -44,6 +44,16 @@ namespace travail1poo
                     Directeur dir = (Directeur)kvp.Value;
                     ListePersonnel.Add(kvp.Key, dir.Poste());
                 }
+                else if (kvp.Value is Directeur_RH)
+                {
+                    Directeur_RH dirrh = (Directeur_RH)kvp.Value;
+                    ListePersonnel.Add(kvp.Key, dirrh.Poste());
+                }
+                else if (kvp.Value is Finance)
+                {
+                    Finance dirf = (Finance)kvp.Value;
+                    ListePersonnel.Add(kvp.Key, dirf.Poste());
+                }
                 else if (kvp.Value is Employé)
                 {
                     Employé empl = (Employé)kvp.Value;
@@ -51,7 +61,45 @@ namespace travail1poo
 			}
             return ListePersonnel;
         }
-        public string SetlistConsultant(string ManageurName)
+        public string SetListEntreprise(string entreprise)
+        {
+            Dictionary<string,string> ListConsultant = new Dictionary<string, string>();
+            foreach (KeyValuePair<string, object> kvp in Emploi)
+            {
+                if(kvp.Value is Consultant)
+                {
+                    Consultant consul = (Consultant)kvp.Value;
+                    string[] e= consul.Entreprise(entreprise).Split('=');
+                    if (e[0] != "")
+                    {
+                        ListConsultant.Add(consul.Nom(), e[1]);
+                    }
+                }
+
+            }
+            string b = "";
+            foreach (KeyValuePair<string, object> kvp in Emploi)
+            {
+                if (kvp.Value is Directeur_RH)
+                {
+                    Directeur_RH dirrh = (Directeur_RH)kvp.Value;
+                    b = dirrh.Nom();
+                }
+
+            }
+
+            if (Emploi[b] is Directeur_RH)
+            {
+                Directeur_RH dirrh = (Directeur_RH)Emploi[b];
+                return dirrh.GetListEntreprise(entreprise, ListConsultant);
+            }
+            else
+            {
+                return "erreur";
+            }
+
+        }
+        public string SetListConsultant(string ManageurName)
         {
             List<string> ListConsultant = new List<string>();
             if(Emploi[ManageurName] is Manageur)
@@ -75,12 +123,12 @@ namespace travail1poo
             }
             else
             {
-                string texte = "Erreur vous n'avez pas mis le nom d'un manageur\n Voici la liste de nos manageur:\n";
+                string texte = "Erreur vous n'avez pas mis le nom d'un manageur\nVoici la liste de nos manageur:\n";
                 foreach (KeyValuePair<string, string> kvp in Personnel())
                 {
                     if (kvp.Value == "Manageur")
                     {
-                        texte += String.Format("{}", kvp.Key);
+                        texte += String.Format("{0}\n", kvp.Key);
                     }
                 }
                 return texte;
