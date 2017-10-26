@@ -8,11 +8,13 @@ namespace travail1poo
 
         public string fonction;
         public string Name;
+ 
     
         public Directeur_RH(string Name, string Date, float Salaire, List<string> fonction) : base(Name, Date, Salaire, fonction)
         {
             this.fonction = fonction[0];
             this.Name = Name;
+ 
         }
 
         public string Poste()

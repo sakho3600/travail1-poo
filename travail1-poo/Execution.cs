@@ -11,7 +11,7 @@ namespace gestion
         public string Name { get; set; }
         public string Date { get; set; }
         public float Salaire { get; set; }
-        public List<string> Associé { get; set; }
+        public List<string> Associe { get; set; }
     }
 
     public class DataClient
@@ -27,10 +27,8 @@ namespace gestion
         {
             Dictionary<string, string> Ad = Traduction(LectureName(), LectureAdress());
             Entreprise Ecam = new Entreprise(Emploi());
-            Console.WriteLine(Ecam);
-			//Console.WriteLine(Ecam.SetListEntreprise("Thales"));
-			//Console.WriteLine(Ecam.SetListConsultant("Aline Balant"));
-			//Console.ReadKey();
+            Console.WriteLine(Ecam.SetListSalaire(Ecam.DirecteurFinance()));
+			Console.ReadKey();
         }
 
         static Dictionary<string, object> Emploi()
@@ -48,33 +46,33 @@ namespace gestion
                 switch (h[i].Poste)
                 {
                     case "Consultant":
-                        Consultant consultant = new Consultant(h[i].Name, h[i].Date, h[i].Salaire, h[i].Associé, Data);
+                        Consultant consultant = new Consultant(h[i].Name, h[i].Date, h[i].Salaire, h[i].Associe, Data);
                         ListEmploi.Add(h[i].Name, consultant);
                         break;
 
                     case "Manageur":
-                        Manageur manageur = new Manageur(h[i].Name, h[i].Date, h[i].Salaire, h[i].Associé);
+                        Manageur manageur = new Manageur(h[i].Name, h[i].Date, h[i].Salaire, h[i].Associe);
                         ListEmploi.Add(h[i].Name, manageur);
                         break;
 
                     case "Directeur":
-                        if (h[i].Associé[0] == "Principal")
+                        if (h[i].Associe[0] == "Principal")
                         {
-                            Directeur directeur = new Directeur(h[i].Name, h[i].Date, h[i].Salaire, h[i].Associé);
+                            Directeur directeur = new Directeur(h[i].Name, h[i].Date, h[i].Salaire, h[i].Associe);
                             ListEmploi.Add(h[i].Name, directeur);
                             break;
                         }
 
-                        else if (h[i].Associé[0] == "RH")
+                        else if (h[i].Associe[0] == "RH")
                         {
-                            Directeur_RH directeur = new Directeur_RH(h[i].Name, h[i].Date, h[i].Salaire, h[i].Associé);
+                            Directeur_RH directeur = new Directeur_RH(h[i].Name, h[i].Date, h[i].Salaire, h[i].Associe);
                             ListEmploi.Add(h[i].Name, directeur);
                             break;
                         }
 
-                        else if (h[i].Associé[0] == "Finance")
+                        else if (h[i].Associe[0] == "Finance")
                         {
-                            Finance directeur = new Finance(h[i].Name, h[i].Date, h[i].Salaire, h[i].Associé);
+                            Finance directeur = new Finance(h[i].Name, h[i].Date, h[i].Salaire, h[i].Associe);
                             ListEmploi.Add(h[i].Name, directeur);
                             break;
                         }

@@ -10,12 +10,15 @@ namespace travail1poo
         //public Societe s;
         public string Client;
         public string manageur;
+        private double SalaireBoss;
+        public float Salaire;
 
         public Consultant(string Name, string Date, float Salaire,List<string> manageur, string Client) : base(Name, Date, Salaire)
         {
             this.Name = Name;
             this.Client = Client;
             this.manageur = manageur[0];
+            this.Salaire = Salaire;
         }
 
         public string Poste()
@@ -62,11 +65,16 @@ namespace travail1poo
             }
             return l;
         }
+        public void GetSalaireBoss(double salaire)
+        {
+            SalaireBoss = salaire;
+        }
 
-        private float CalculSalaireTotal()
+        public double SetSalaireTotal()
         {
             int CompteurMission = 0;
             int CompteurInterne=0;
+            double SalaireTotal = this.Salaire;
             foreach (KeyValuePair<string, Dictionary<string, List<DateTime>>> kvp in Horaire())
             {
                 foreach (KeyValuePair<string, List<DateTime>> lol in kvp.Value)
@@ -83,7 +91,8 @@ namespace travail1poo
                     }
                 }
             }
-            return 0;
+            SalaireTotal += CompteurMission * 250 + (CompteurInterne * ((0.01 * SalaireBoss) - 10));
+            return SalaireTotal;
         }
 
         public string Agenda(DateTime dateTime)

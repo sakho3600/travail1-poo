@@ -55,6 +55,96 @@ namespace travail1poo
 			}
             return ListePersonnel;
         }
+        public void SetSalaire()
+        {
+            foreach (KeyValuePair<string, object> kvp in Emploi)
+            {
+                if(kvp.Value is Manageur)
+                {
+                    Manageur manag = (Manageur)kvp.Value;
+                    List<string>e = new List<string>(manag.Esclave());
+                    for (int i = 0; i < e.Count; i++)
+                    {
+                        if(Emploi[e[i]] is Consultant)
+                        {
+                            Consultant consul = (Consultant)Emploi[e[i]];
+                            consul.GetSalaireBoss(manag.SetSalaireTotal());
+                        }
+                    }
+                }
+            }
+
+        }
+        public string DirecteurFinance()
+        {
+            string Nom = "";
+            foreach (KeyValuePair<string, object> kvp in Emploi)
+            {
+                if(kvp.Value is Finance)
+                {
+                    Nom = kvp.Key;
+                }
+            }
+            return Nom;
+        }
+
+        public string SetListSalaire(string Directeur)
+        {
+            Dictionary<string, double> ListSalaire = new Dictionary<string, double>();
+            
+            SetSalaire();
+            foreach (KeyValuePair<string, object> lol in Emploi)
+            {
+                {
+                    if (lol.Value is Consultant)
+                    {
+                        Consultant consul = (Consultant)lol.Value;
+                        ListSalaire.Add(lol.Key, consul.SetSalaireTotal());
+                    }
+                    else if (lol.Value is Manageur)
+                    {
+                        Manageur manag = (Manageur)lol.Value;
+                        ListSalaire.Add(lol.Key, manag.SetSalaireTotal());
+                    }
+                    else if (lol.Value is Directeur)
+                    {
+                        Directeur dir = (Directeur)lol.Value;
+                        ListSalaire.Add(lol.Key, dir.SetSalaireTotal());
+                    }
+                    else if (lol.Value is Directeur_RH)
+                    {
+                        Directeur_RH dirrh = (Directeur_RH)lol.Value;
+                        ListSalaire.Add(lol.Key, dirrh.SetSalaireTotal());
+                    }
+                    else if (lol.Value is Finance)
+                    {
+                        Finance dirf = (Finance)lol.Value;
+                        ListSalaire.Add(lol.Key, dirf.SetSalaireTotal());
+                    }
+
+                }
+            }
+            try
+            {
+                if (Emploi[Directeur] is Finance)
+                {
+                    Finance sal = (Finance)Emploi[Directeur];
+                    return sal.GetListSalaire(ListSalaire);
+                }
+                else
+                {
+                    return "Erreur dans la base de donnée ou dans la classe entreprise";
+                }
+            }
+            catch
+            {
+                return " Erreur dans la base de donnée ou dans la classe entreprise";
+            }
+
+
+        }
+
+           
 
         public string SetListEntreprise(string entreprise)
         {
@@ -133,6 +223,7 @@ namespace travail1poo
                 return texte;
             }
         }
+
 
         public override string ToString()
 

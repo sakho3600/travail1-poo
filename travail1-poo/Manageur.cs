@@ -14,7 +14,7 @@ namespace travail1poo
             this.Salaire = Salaire;
         }
 
-        public float SalaireTotal()
+        public double SetSalaireTotal()
         {
             float Total = this.Salaire + (500 * this.Consult.Count);
             return Total;

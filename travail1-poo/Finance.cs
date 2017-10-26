@@ -21,5 +21,15 @@ namespace travail1poo
         {
 			return this.Name;
         }
+
+        public string GetListSalaire(Dictionary<string,double> ListSalaire)
+        {
+            string Texte = "Liste des Salaire :\n";
+            foreach (KeyValuePair<string, double> lol in ListSalaire)
+            {
+                Texte += String.Format("{0}:{1}\n", lol.Key, lol.Value);
+            }
+            return Texte;
+        }
     }
 }

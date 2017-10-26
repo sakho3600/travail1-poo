@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Application
+namespace travail1poo
 {
-    public class EmptyClass
+    class Affichage
     {
-        public static void Main(string[] args)
+        public static void Affiche(Entreprise societe)
         {
             Console.WriteLine("Gestionnaire d'employés.\r\nVeuillez choisir un rapport à générer:\r\n");
             Console.WriteLine("1. Générer un rapport pour le manager.");
@@ -32,11 +36,13 @@ namespace Application
             {
                 case 1:
                     Console.WriteLine("Choisissez le manager pour lequel le rapport doit être généré.");
-                    //
+                    string response = Console.ReadLine();
+                    Console.WriteLine(societe.SetListConsultant(response));
                     break;
                 case 2:
-                    Console.WriteLine("case 2");
-                    //RH
+                    Console.WriteLine("Choisissez le manager pour lequel le rapport doit être généré.");
+                    string reponse = Console.ReadLine();
+                    Console.WriteLine(societe.SetListEntreprise(reponse));
                     break;
                 case 3:
                     Console.WriteLine("case 3");
@@ -45,4 +51,5 @@ namespace Application
             }
         }
     }
+    
 }
