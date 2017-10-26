@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace travail1poo
 {
@@ -17,10 +14,12 @@ namespace travail1poo
             this.fonction = fonction[0];
             this.Name = Name;
         }
+
         public string Poste()
         {
             return String.Format("Directeur {0}", fonction);
         }
+
         public string Nom()
         {
             return this.Name;

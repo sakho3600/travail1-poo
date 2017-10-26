@@ -31,7 +31,8 @@ namespace Application
             switch (choice)
             {
                 case 1:
-                    // manager
+                    Console.WriteLine("Choisissez le manager pour lequel le rapport doit être généré.");
+                    //
                     break;
                 case 2:
                     Console.WriteLine("case 2");

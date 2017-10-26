@@ -1,13 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System;
-using System.IO;
-using System.Collections.Generic;
 using Newtonsoft.Json;
-using travail1poo;
 using gestion;
 
 namespace travail1poo
@@ -17,23 +10,24 @@ namespace travail1poo
         //public Societe s;
         public string Client;
         public string manageur;
-        private string Name;
 
         public Consultant(string Name, string Date, float Salaire,List<string> manageur, string Client) : base(Name, Date, Salaire)
         {
             this.Name = Name;
             this.Client = Client;
             this.manageur = manageur[0];
-
         }
+
         public string Poste()
         {
             return "Consultant";
         }
+
         public string Nom()
         {
             return this.Name;
         }
+
         private Dictionary<string,Dictionary<string,List<DateTime>>>Horaire()
         {
             var h = JsonConvert.DeserializeObject<List<DataClient>>(this.Client);
@@ -64,14 +58,11 @@ namespace travail1poo
                     b.Add(d);
                     k["externe"] = b;
                     l[h[i].Name] = k;
-
                 }
-
-
-
             }
             return l;
         }
+
         private float CalculSalaireTotal()
         {
             int CompteurMission = 0;
@@ -92,10 +83,9 @@ namespace travail1poo
                     }
                 }
             }
-
-
-        return 0;
+            return 0;
         }
+
         public string Agenda(DateTime dateTime)
         {
             string tot = "";
@@ -107,13 +97,11 @@ namespace travail1poo
                     {
                         tot += String.Format("{0}:{1}:{2}:{3} au {4}", this.Name, kvp.Key, lol.Key, lol.Value[0], lol.Value[1]);
                     }
-
                 }
-
-
             }
             return tot;
         }
+
         public string Entreprise(string entreprise)
         {
             string tot = "";
@@ -125,10 +113,7 @@ namespace travail1poo
                     {
                         tot += String.Format("{0}={1} au {2}", kvp.Key, lol.Value[0], lol.Value[1]);
                     }
-
                 }
-
-
             }
             return tot;
         }

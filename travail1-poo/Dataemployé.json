@@ -3,7 +3,7 @@
 		"Name":"Kirstein Julien",
 		"Date":"12/07/1996",
 		"Salaire":150000,
-        "Associé":["Principal"]
+        "Associé":["Principal", "Inconnu"]
 		 },
     {	"Poste":"Directeur",
 		"Name":"Stilmant Julien",

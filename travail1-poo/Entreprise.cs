@@ -1,10 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using gestion;
-using Newtonsoft.Json;
-using travail1poo;
 
 namespace travail1poo
 {
@@ -23,7 +18,6 @@ namespace travail1poo
         }
 
         public Dictionary<string, string> Personnel()
-
         {
             Dictionary<string, string> ListePersonnel = new Dictionary<string, string>();
             
@@ -61,6 +55,7 @@ namespace travail1poo
 			}
             return ListePersonnel;
         }
+
         public string SetListEntreprise(string entreprise)
         {
             Dictionary<string,string> ListConsultant = new Dictionary<string, string>();
@@ -69,7 +64,9 @@ namespace travail1poo
                 if(kvp.Value is Consultant)
                 {
                     Consultant consul = (Consultant)kvp.Value;
-                    string[] e= consul.Entreprise(entreprise).Split('=');
+
+                    string[] e = consul.Entreprise(entreprise).Split('=');
+                    
                     if (e[0] != "")
                     {
                         ListConsultant.Add(consul.Nom(), e[1]);
@@ -77,6 +74,7 @@ namespace travail1poo
                 }
 
             }
+
             string b = "";
             foreach (KeyValuePair<string, object> kvp in Emploi)
             {
@@ -97,8 +95,8 @@ namespace travail1poo
             {
                 return "erreur";
             }
-
         }
+
         public string SetListConsultant(string ManageurName)
         {
             List<string> ListConsultant = new List<string>();
@@ -114,13 +112,13 @@ namespace travail1poo
                         {
                             Consultant consul = (Consultant)kvp.Value;
                             ListConsultant.Add(consul.Agenda(DateTime.Today));
-
                         }
                     }
                 }
-                return manag.GetListConsultant(ListConsultant);
 
+                return manag.GetListConsultant(ListConsultant);
             }
+
             else
             {
                 string texte = "Erreur vous n'avez pas mis le nom d'un manageur\nVoici la liste de nos manageur:\n";
@@ -131,11 +129,9 @@ namespace travail1poo
                         texte += String.Format("{0}\n", kvp.Key);
                     }
                 }
+
                 return texte;
-
-
             }
-
         }
 
         public override string ToString()
@@ -146,8 +142,8 @@ namespace travail1poo
             {
                 tot+= String.Format("{0}:{1}\n",kvp.Key,kvp.Value);
             }
+
             return tot;
-                
         }
     }
 }

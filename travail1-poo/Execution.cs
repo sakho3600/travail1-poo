@@ -1,21 +1,17 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using travail1poo;
-using gestion;
 
 namespace gestion
 {
     public class DataEmploye
-    {   public string Poste { get; set; }
+    {
+        public string Poste { get; set; }
         public string Name { get; set; }
         public string Date { get; set; }
         public float Salaire { get; set; }
-        public List<string> Associe { get; set; }
-    }
-
-
+        public List<string> Associé { get; set; }
     }
 
     public class DataClient
@@ -25,125 +21,121 @@ namespace gestion
         public string DateEnd { get; set; }
     }
 
-class MainClass
-{
-    public static void Main(string[] args)
+    class MainClass
     {
-        Dictionary<string, string> Ad = Traduction(LectureName(), LectureAdress());
-        Entreprise Ecam = new Entreprise(Emploi());
-        Console.WriteLine(Ecam);
-        Console.WriteLine(Ecam.SetListEntreprise("Thales"));
-        Console.WriteLine(Ecam.SetListConsultant("Aline Balant"));
-        Console.ReadKey();
-    }
-
-    static Dictionary<string, object> Emploi()
-    {
-        Dictionary<string, object> ListEmploi = new Dictionary<string, object>();
-        string data = System.IO.File.ReadAllText(@"Dataemployé.json");
-        var h = JsonConvert.DeserializeObject<List<DataEmploye>>(data);
-        int count = h.Count;
-        Dictionary<string, string> Trad = Traduction(LectureName(), LectureAdress());
-        for (int i = 0; i < count; i++)
+        public static void Main(string[] args)
         {
-            string b = Trad[h[i].Name];
-            string Data = System.IO.File.ReadAllText(@b);
+            Dictionary<string, string> Ad = Traduction(LectureName(), LectureAdress());
+            Entreprise Ecam = new Entreprise(Emploi());
+            Console.WriteLine(Ecam);
+			//Console.WriteLine(Ecam.SetListEntreprise("Thales"));
+			//Console.WriteLine(Ecam.SetListConsultant("Aline Balant"));
+			//Console.ReadKey();
+        }
 
-            switch (h[i].Poste)
+        static Dictionary<string, object> Emploi()
+        {
+            Dictionary<string, object> ListEmploi = new Dictionary<string, object>();
+            string data = System.IO.File.ReadAllText(@"Dataemployé.json");
+            var h = JsonConvert.DeserializeObject<List<DataEmploye>>(data);
+            int count = h.Count;
+            Dictionary<string, string> Trad = Traduction(LectureName(), LectureAdress());
+
+            for (int i = 0; i < count; i++)
             {
-                case "Consultant":
-                    Consultant consultant = new Consultant(h[i].Name, h[i].Date, h[i].Salaire, h[i].Associe, Data);
-                    ListEmploi.Add(h[i].Name, consultant);
-                    break;
-
-                case "Manageur":
-                    Manageur manageur = new Manageur(h[i].Name, h[i].Date, h[i].Salaire, h[i].Associe);
-                    ListEmploi.Add(h[i].Name, manageur);
-                    break;
-
-                case "Directeur":
-                    if (h[i].Associe[0] == "Principal")
-                    {
-                        Directeur directeur = new Directeur(h[i].Name, h[i].Date, h[i].Salaire,h[i].Associe);
-                        ListEmploi.Add(h[i].Name, directeur);
-                        break;
-                    }
-                    else if(h[i].Associe[0] == "RH")
-                    {
-                        Directeur_RH directeur = new Directeur_RH(h[i].Name, h[i].Date, h[i].Salaire,h[i].Associe);
-                        ListEmploi.Add(h[i].Name, directeur);
+                string b = Trad[h[i].Name];
+                string Data = System.IO.File.ReadAllText(@b);
+                switch (h[i].Poste)
+                {
+                    case "Consultant":
+                        Consultant consultant = new Consultant(h[i].Name, h[i].Date, h[i].Salaire, h[i].Associé, Data);
+                        ListEmploi.Add(h[i].Name, consultant);
                         break;
 
-                    }
-                    else if (h[i].Associe[0] == "Finance")
-                    {
-                        Finance directeur = new Finance(h[i].Name, h[i].Date, h[i].Salaire,h[i].Associe);
-                        ListEmploi.Add(h[i].Name, directeur);
+                    case "Manageur":
+                        Manageur manageur = new Manageur(h[i].Name, h[i].Date, h[i].Salaire, h[i].Associé);
+                        ListEmploi.Add(h[i].Name, manageur);
                         break;
 
-                    }
-                    else
-                    {
+                    case "Directeur":
+                        if (h[i].Associé[0] == "Principal")
+                        {
+                            Directeur directeur = new Directeur(h[i].Name, h[i].Date, h[i].Salaire, h[i].Associé);
+                            ListEmploi.Add(h[i].Name, directeur);
+                            break;
+                        }
+
+                        else if (h[i].Associé[0] == "RH")
+                        {
+                            Directeur_RH directeur = new Directeur_RH(h[i].Name, h[i].Date, h[i].Salaire, h[i].Associé);
+                            ListEmploi.Add(h[i].Name, directeur);
+                            break;
+                        }
+
+                        else if (h[i].Associé[0] == "Finance")
+                        {
+                            Finance directeur = new Finance(h[i].Name, h[i].Date, h[i].Salaire, h[i].Associé);
+                            ListEmploi.Add(h[i].Name, directeur);
+                            break;
+                        }
+
+                        else
+                        {
+                            break;
+                        }
+
+                    default:
+                        Employé employé = new Employé(h[i].Name, h[i].Date, h[i].Salaire);
+                        ListEmploi.Add(h[i].Name, employé);
                         break;
-                    }
-
-
-                default:
-                    Employé employé = new Employé(h[i].Name, h[i].Date, h[i].Salaire);
-                    ListEmploi.Add(h[i].Name, employé);
-                    break;
+                }
             }
+            return ListEmploi;
         }
 
-        return ListEmploi;
-
-    }
-
-
-    static List<string> LectureName()
-    {
-        List<string> ListName = new List<string>();
-        string data = System.IO.File.ReadAllText(@"Dataemployé.json");
-        var h = JsonConvert.DeserializeObject<List<DataEmploye>>(data);
-        int cont = h.Count;
-
-
-        for (int i = 0; i < cont; i++)
+        static List<string> LectureName()
         {
-            ListName.Add(h[i].Name);
+            List<string> ListName = new List<string>();
+            string data = System.IO.File.ReadAllText(@"Dataemployé.json");
+            var h = JsonConvert.DeserializeObject<List<DataEmploye>>(data);
+            int cont = h.Count;
+
+            for (int i = 0; i < cont; i++)
+            {
+                ListName.Add(h[i].Name);
+            }
+
+            return ListName;
         }
-        return ListName;
-    }
 
-    static List<string> LectureAdress()
-    {
-        List<string> ListAdress = new List<string>();
-        string AdressList = System.IO.File.ReadAllText(@"Dataadress.json");
-        var p = JsonConvert.DeserializeObject<List<string>>(AdressList);
-        int cont1 = p.Count;
-
-        for (int i = 0; i < cont1; i++)
+        static List<string> LectureAdress()
         {
-            ListAdress.Add(p[i]);
+            List<string> ListAdress = new List<string>();
+            string AdressList = System.IO.File.ReadAllText(@"Dataadress.json");
+            var p = JsonConvert.DeserializeObject<List<string>>(AdressList);
+            int cont1 = p.Count;
+
+            for (int i = 0; i < cont1; i++)
+            {
+                ListAdress.Add(p[i]);
+            }
+
+            return ListAdress;
         }
 
-        return ListAdress;
-    }
-    static Dictionary<string, string> Traduction(List<string> ListName, List<string> ListAdress)
-    {
-        string a = System.IO.File.ReadAllText(@"Dataadress.json");
-        var b = JsonConvert.DeserializeObject<List<string>>(a);
-        int cont1 = b.Count;
-        Dictionary<string, string> Adresse = new Dictionary<string, string>();
-
-        for (int i = 0; i < cont1; i++)
+        static Dictionary<string, string> Traduction(List<string> ListName, List<string> ListAdress)
         {
-            Adresse.Add(ListName[i], ListAdress[i]);
+            string a = System.IO.File.ReadAllText(@"Dataadress.json");
+            var b = JsonConvert.DeserializeObject<List<string>>(a);
+            int cont1 = b.Count;
+            Dictionary<string, string> Adresse = new Dictionary<string, string>();
+
+            for (int i = 0; i < cont1; i++)
+            {
+                Adresse.Add(ListName[i], ListAdress[i]);
+            }
+
+            return Adresse;
         }
-
-        return Adresse;
     }
-
-
-
 }
