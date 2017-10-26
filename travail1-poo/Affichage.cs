@@ -40,13 +40,27 @@ namespace travail1poo
                     Console.WriteLine(societe.SetListConsultant(response));
                     break;
                 case 2:
-                    Console.WriteLine("Choisissez le manager pour lequel le rapport doit être généré.");
+                    Console.WriteLine("Choisissez l'entreprise dont vous voulez voir la liste de nos consultant qui y ont travaillé.");
                     string reponse = Console.ReadLine();
                     Console.WriteLine(societe.SetListEntreprise(reponse));
                     break;
                 case 3:
-                    Console.WriteLine("case 3");
-                    //financier
+                    int choise = 0;
+                    try
+                    {
+                        string year = Console.ReadLine();
+                        choise = int.Parse(year);
+
+                        if ((2018>= choice) || (choice >= 2015))
+                        {
+                            throw new System.Exception();
+                        }
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Veuillez entrer une année entre 2016 et 2017");
+                    }
+                    Console.WriteLine(societe.SetListSalaire(societe.DirecteurFinance(),choise));
                     break;
             }
         }

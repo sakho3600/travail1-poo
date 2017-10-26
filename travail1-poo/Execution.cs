@@ -27,7 +27,7 @@ namespace gestion
         {
             Dictionary<string, string> Ad = Traduction(LectureName(), LectureAdress());
             Entreprise Ecam = new Entreprise(Emploi());
-            Console.WriteLine(Ecam.SetListSalaire(Ecam.DirecteurFinance()));
+            Affichage.Affiche(Ecam);
 			Console.ReadKey();
         }
         // Pas touche au variable Associe

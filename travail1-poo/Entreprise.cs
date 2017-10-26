@@ -12,10 +12,14 @@ namespace travail1poo
             this.Emploi = ListeEmploi;
         }
 
+        // Fonction Encode permet de rejouter un employé dans le dictionnaire Emploi//
+
         public void Encode(string a, object b)
         {
             this.Emploi.Add(a, b);
         }
+
+        // Fonction personnel revoie un dictionnaire des noms des employés et leurs postes //
 
         public Dictionary<string, string> Personnel()
         {
@@ -55,7 +59,10 @@ namespace travail1poo
 			}
             return ListePersonnel;
         }
-        public void SetSalaire()
+
+        // Fonction SetSalaire envoie le salaire des manageur à leurs consultants pour que ceux-ci puisse calculer leur salaire //
+
+        public void SetSalaire(int annee)
         {
             foreach (KeyValuePair<string, object> kvp in Emploi)
             {
@@ -68,13 +75,16 @@ namespace travail1poo
                         if(Emploi[e[i]] is Consultant)
                         {
                             Consultant consul = (Consultant)Emploi[e[i]];
-                            consul.GetSalaireBoss(manag.SetSalaireTotal());
+                            consul.GetSalaireBoss(manag.SetSalaireTotal(),annee);
                         }
                     }
                 }
             }
 
         }
+
+        // Fonction DirecteurFinance renvoi le Nom du directur des Finance de l'entreprise  //
+
         public string DirecteurFinance()
         {
             string Nom = "";
@@ -88,11 +98,13 @@ namespace travail1poo
             return Nom;
         }
 
-        public string SetListSalaire(string Directeur)
+        // Fonction SelListSalaire envoie à la classe Finance un dictionnaire des Noms et des salaire pour que l'intance de cette classe puisse renvoie la Liste des salaires //
+
+        public string SetListSalaire(string Directeur,int annee)
         {
             Dictionary<string, double> ListSalaire = new Dictionary<string, double>();
             
-            SetSalaire();
+            SetSalaire(annee);
             foreach (KeyValuePair<string, object> lol in Emploi)
             {
                 {
@@ -144,7 +156,8 @@ namespace travail1poo
 
         }
 
-           
+        // Fonction SelListEntreprise envoie à la classe Directeur_RH un dictionnaire des Noms et des date pour que l'intance de cette classe puisse renvoie la Liste des Consultants //
+        // travaillant dans une entreprise donnée//
 
         public string SetListEntreprise(string entreprise)
         {
@@ -187,6 +200,9 @@ namespace travail1poo
             }
         }
 
+        // Fonction SelListConsultant envoie à la classe Manageur une liste des Noms des consultant et de lentreprise où ils travaillent pour que l'intance de cette classe puisse renvoyé cette liste  //
+
+
         public string SetListConsultant(string ManageurName)
         {
             List<string> ListConsultant = new List<string>();
@@ -224,18 +240,6 @@ namespace travail1poo
             }
         }
 
-
-        public override string ToString()
-
-        {
-            string tot = "";
-            foreach (KeyValuePair<string, string> kvp in Personnel())
-            {
-                tot+= String.Format("{0}:{1}\n",kvp.Key,kvp.Value);
-            }
-
-            return tot;
-        }
     }
 }
       

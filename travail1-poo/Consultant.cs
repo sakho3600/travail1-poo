@@ -12,6 +12,7 @@ namespace travail1poo
         public string manageur;
         private double SalaireBoss;
         public float Salaire;
+        public int Annee;
 
         public Consultant(string Name, string Date, float Salaire,List<string> manageur, string Client) : base(Name, Date, Salaire)
         {
@@ -65,9 +66,30 @@ namespace travail1poo
             }
             return l;
         }
-        public void GetSalaireBoss(double salaire)
+        public void GetSalaireBoss(double salaire,int annee)
         {
             SalaireBoss = salaire;
+            Annee = annee;
+
+        }
+
+        private Dictionary<string, Dictionary<string, List<DateTime>>> HoraireParAnnnee(int year)
+        {
+            Dictionary<string, Dictionary<string, List<DateTime>>> l = new Dictionary<string, Dictionary<string, List<DateTime>>>();
+            foreach (KeyValuePair<string, Dictionary<string, List<DateTime>>> kvp in Horaire())
+            {
+                foreach (KeyValuePair<string, List<DateTime>> lol in kvp.Value)
+                {
+                    
+                    if (lol.Value[0].Year == year)
+                    {
+                        Dictionary<string, List<DateTime>> a = new Dictionary<string, List<DateTime>>();
+                        a.Add(lol.Key, lol.Value);
+                        l[kvp.Key] = a;
+                    }
+                }
+            }
+            return l;
         }
 
         public double SetSalaireTotal()
@@ -75,7 +97,7 @@ namespace travail1poo
             int CompteurMission = 0;
             int CompteurInterne=0;
             double SalaireTotal = this.Salaire;
-            foreach (KeyValuePair<string, Dictionary<string, List<DateTime>>> kvp in Horaire())
+            foreach (KeyValuePair<string, Dictionary<string, List<DateTime>>> kvp in HoraireParAnnnee(Annee))
             {
                 foreach (KeyValuePair<string, List<DateTime>> lol in kvp.Value)
                 {
@@ -85,9 +107,20 @@ namespace travail1poo
                     }
                     else if (lol.Key is "interne")
                     {
-                        TimeSpan sub = lol.Value[1] - lol.Value[0];
-                        string a = String.Format("{}", sub);
-                        CompteurInterne += Int32.Parse(a);
+                        if (lol.Value[1].Year == Annee)
+                        {
+                            TimeSpan sub = lol.Value[1] - lol.Value[0];
+                            string a = String.Format("{}", sub);
+                            CompteurInterne += Int32.Parse(a);
+                        }
+                        else
+                        {
+                            string b = String.Format("31/12/{0}", Annee);
+                            lol.Value[1] = Convert.ToDateTime(b);
+                            TimeSpan sub = lol.Value[1] - lol.Value[0];
+                            string a = String.Format("{}", sub);
+                            CompteurInterne += Int32.Parse(a);
+                        }
                     }
                 }
             }
