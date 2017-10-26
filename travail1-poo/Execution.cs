@@ -30,7 +30,7 @@ namespace gestion
             Console.WriteLine(Ecam.SetListSalaire(Ecam.DirecteurFinance()));
 			Console.ReadKey();
         }
-
+        // Pas touche au variable Associe
         static Dictionary<string, object> Emploi()
         {
             Dictionary<string, object> ListEmploi = new Dictionary<string, object>();
