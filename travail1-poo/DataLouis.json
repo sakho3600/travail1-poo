@@ -1,0 +1,57 @@
+[
+    {
+		"Name":"Airbus",
+		"DateStart": "02/01/2016",
+		"DateEnd":"19/04/2016"
+	},
+    {
+		"Name":"Thales",
+		"DateStart": "20/04/2016",
+		"DateEnd":"23/08/2016"
+	},
+    {
+		"Name":"Interne",
+		"DateStart": "24/08/2016",
+		"DateEnd":"10/09/2016"
+	},
+    {
+		"Name":"Google",
+		"DateStart": "11/09/2016",
+		"DateEnd":"12/11/2016"
+	},
+    {
+		"Name":"Sabca",
+		"DateStart": "13/11/2016",
+		"DateEnd":"9/01/2017"
+	},
+	{
+		"Name":"Thales",
+		"DateStart": "10/01/2017",
+		"DateEnd":"15/03/2017"
+	},
+	{
+		"Name":"Interne",
+		"DateStart": "16/03/2017",
+		"DateEnd":"10/04/2017"
+	},
+	{
+		"Name":"Delphi",
+		"DateStart": "11/04/2017",
+		"DateEnd":"03/06/2017"
+	},
+	{
+		"Name":"Sabca",
+		"DateStart": "04/06/2017",
+		"DateEnd":"22/09/2017"
+	},
+	{
+		"Name":"Interne",
+		"DateStart": "23/09/2017",
+		"DateEnd":"17/10/2017"
+	},
+	{
+		"Name":"Airbus",
+		"DateStart": "18/10/2017",
+		"DateEnd":"31/12/2017"
+	}
+]
