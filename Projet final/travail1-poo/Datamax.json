@@ -1,0 +1,42 @@
+[   
+    {
+		"Name":"Thales",
+		"DateStart": "02/01/2016",
+		"DateEnd":"19/05/2016"
+	},
+    {
+		"Name":"SNCB",
+		"DateStart": "20/05/2016",
+		"DateEnd":"30/08/2016"
+	},
+    {
+		"Name":"Interne",
+		"DateStart": "01/09/2016",
+		"DateEnd":"10/10/2016"
+	},
+    {
+		"Name":"Google",
+		"DateStart": "11/09/2016",
+		"DateEnd":"12/12/2016"
+	},
+    {
+		"Name":"Sabca",
+		"DateStart": "13/12/2016",
+		"DateEnd":"14/01/2017"
+	},
+	{
+		"Name":"Cristaline",
+		"DateStart": "15/01/2017",
+		"DateEnd":  "15/06/2017"
+	},
+	{
+		"Name":"Interne",
+		"DateStart":    "16/06/2017",
+		"DateEnd":  "23/09/2017"
+	},
+	{
+		"Name":"Soyouz",
+		"DateStart": "24/06/2017",
+		"DateEnd":  "31/12/2017"
+	},
+]
