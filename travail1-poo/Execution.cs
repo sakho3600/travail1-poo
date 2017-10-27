@@ -30,19 +30,23 @@ namespace gestion
             Affichage.Affiche(Ecam);
 			Console.ReadKey();
         }
+
         // Pas touche au variable Associe
         static Dictionary<string, object> Emploi()
         {
+            // Dictionaire avec le nom et l'instance des classes qu'on envoie aux entreprises
             Dictionary<string, object> ListEmploi = new Dictionary<string, object>();
             string data = System.IO.File.ReadAllText(@"Dataemployé.json");
             var h = JsonConvert.DeserializeObject<List<DataEmploye>>(data);
-            int count = h.Count;
+            // Contient le nom et l'emplacement du fichier json de chaque employé
             Dictionary<string, string> Trad = Traduction(LectureName(), LectureAdress());
 
+            int count = h.Count;
             for (int i = 0; i < count; i++)
             {
                 string b = Trad[h[i].Name];
                 string Data = System.IO.File.ReadAllText(@b);
+                // On crée les objets du bon type en fonction du poste
                 switch (h[i].Poste)
                 {
                     case "Consultant":
@@ -91,6 +95,7 @@ namespace gestion
             return ListEmploi;
         }
 
+        // Renvoie la liste de tou les employés qu'on a été chercher dans le fichier json
         static List<string> LectureName()
         {
             List<string> ListName = new List<string>();
@@ -106,6 +111,7 @@ namespace gestion
             return ListName;
         }
 
+        // Renvoie la liste des fichiers json contenant les informations
         static List<string> LectureAdress()
         {
             List<string> ListAdress = new List<string>();
@@ -121,6 +127,7 @@ namespace gestion
             return ListAdress;
         }
 
+        // Renvoie le nom et l'emplacement du fichier ensemble dans un dictionnaire
         static Dictionary<string, string> Traduction(List<string> ListName, List<string> ListAdress)
         {
             string a = System.IO.File.ReadAllText(@"Dataadress.json");
