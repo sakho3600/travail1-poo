@@ -54,31 +54,54 @@ namespace travail1poo
 
         public static void cas1(Entreprise societe)
         {
-            Console.Clear();
-            Console.WriteLine("Choisissez le manager pour lequel le rapport doit être généré:");
-            string response1 = Console.ReadLine();
-            Console.Clear();
-            Console.WriteLine(societe.SetListConsultant(response1));
+            try
+            {
+                Console.WriteLine("Choisissez le manager pour lequel le rapport doit être généré:");
+                string response1 = Console.ReadLine();
+                Console.Clear();
+                Console.WriteLine(societe.SetListConsultant(response1));
+            }
+            catch
+            {
+                Console.WriteLine("Veillez un Nom de Manageur valide\nExemple:Maxime Bourguignon");
+                cas1(societe);
+
+            }
         }
 
         public static void cas2(Entreprise societe)
         {
-            Console.Clear();
-            Console.WriteLine("Choisissez l'entreprise dont vous voulez voir la liste de nos consultant qui y ont travaillé:");
-            string response2 = Console.ReadLine();
-            Console.Clear();
-            Console.WriteLine(societe.SetListEntreprise(response2));
+            try
+            {
+                Console.WriteLine("Choisissez l'entreprise dont vous voulez voir la liste de nos consultant qui y ont travaillé:");
+                string response2 = Console.ReadLine();
+                Console.Clear();
+                Console.WriteLine(societe.SetListEntreprise(response2, societe.DirecteurRH()));
+            }
+            catch
+            {
+                Console.WriteLine("Veillez un Nom d'entreprise valide\nExemple:Google");
+                cas2(societe);
+            }
         }
 
         public static void cas3(Entreprise societe)
         {
-            Console.Clear();
+
             Console.WriteLine("Choisissez une Année:");
-            string response3 = Console.ReadLine();
-            int choise = 0;
-            choise = Int16.Parse(response3);
-            Console.Clear();
-            Console.WriteLine(societe.SetListSalaire(societe.DirecteurFinance(), choise));
+            try
+            {
+                string response3 = Console.ReadLine();
+                int choise = 0;
+                choise = Int16.Parse(response3);
+                Console.Clear();
+                Console.WriteLine(societe.SetListSalaire(societe.DirecteurFinance(), choise));
+            }
+            catch
+            {
+                Console.WriteLine("Veillez rentrer une année valide\nExemple:2017");
+                cas3(societe);
+            }
         }
         public static void retour(Entreprise societe)
         {
