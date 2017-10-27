@@ -24,7 +24,7 @@ namespace travail1poo
         public Dictionary<string, string> Personnel()
         {
             Dictionary<string, string> ListePersonnel = new Dictionary<string, string>();
-            
+
             foreach (KeyValuePair<string, object> kvp in Emploi)
             {
                 if (kvp.Value is Consultant)
@@ -37,7 +37,7 @@ namespace travail1poo
                     Manageur manag = (Manageur)kvp.Value;
                     ListePersonnel.Add(kvp.Key, manag.Poste());
                 }
-                else if(kvp.Value is Directeur)
+                else if (kvp.Value is Directeur)
                 {
                     Directeur dir = (Directeur)kvp.Value;
                     ListePersonnel.Add(kvp.Key, dir.Poste());
@@ -56,7 +56,7 @@ namespace travail1poo
                 {
                     Employé empl = (Employé)kvp.Value;
                 }
-			}
+            }
             return ListePersonnel;
         }
 
@@ -66,16 +66,16 @@ namespace travail1poo
         {
             foreach (KeyValuePair<string, object> kvp in Emploi)
             {
-                if(kvp.Value is Manageur)
+                if (kvp.Value is Manageur)
                 {
                     Manageur manag = (Manageur)kvp.Value;
-                    List<string>e = new List<string>(manag.Esclave());
+                    List<string> e = new List<string>(manag.Esclave());
                     for (int i = 0; i < e.Count; i++)
                     {
-                        if(Emploi[e[i]] is Consultant)
+                        if (Emploi[e[i]] is Consultant)
                         {
                             Consultant consul = (Consultant)Emploi[e[i]];
-                            consul.GetSalaireBoss(manag.SetSalaireTotal(),annee);
+                            consul.GetSalaireBoss(manag.SetSalaireTotal(), annee);
                         }
                     }
                 }
@@ -83,14 +83,14 @@ namespace travail1poo
 
         }
 
-        // Fonction DirecteurFinance renvoi le Nom du directur des Finance de l'entreprise  //
+        // Fonctions qui renvoient un string de Nom //
 
         public string DirecteurFinance()
         {
             string Nom = "";
             foreach (KeyValuePair<string, object> kvp in Emploi)
             {
-                if(kvp.Value is Finance)
+                if (kvp.Value is Finance)
                 {
                     Nom = kvp.Key;
                 }
@@ -98,59 +98,98 @@ namespace travail1poo
             return Nom;
         }
 
-        // Fonction SelListSalaire envoie à la classe Finance un dictionnaire des Noms et des salaire pour que l'intance de cette classe puisse renvoie la Liste des salaires //
-
-        public string SetListSalaire(string Directeur,int annee)
+        public string DirecteurRH()
         {
-            Dictionary<string, double> ListSalaire = new Dictionary<string, double>();
-            
-            SetSalaire(annee);
-            foreach (KeyValuePair<string, object> lol in Emploi)
+            string Nom = "";
+            foreach (KeyValuePair<string, object> kvp in Emploi)
             {
+                if (kvp.Value is Directeur_RH)
                 {
-                    if (lol.Value is Consultant)
-                    {
-                        Consultant consul = (Consultant)lol.Value;
-                        ListSalaire.Add(lol.Key, consul.SetSalaireTotal());
-                    }
-                    else if (lol.Value is Manageur)
-                    {
-                        Manageur manag = (Manageur)lol.Value;
-                        ListSalaire.Add(lol.Key, manag.SetSalaireTotal());
-                    }
-                    else if (lol.Value is Directeur)
-                    {
-                        Directeur dir = (Directeur)lol.Value;
-                        ListSalaire.Add(lol.Key, dir.SetSalaireTotal());
-                    }
-                    else if (lol.Value is Directeur_RH)
-                    {
-                        Directeur_RH dirrh = (Directeur_RH)lol.Value;
-                        ListSalaire.Add(lol.Key, dirrh.SetSalaireTotal());
-                    }
-                    else if (lol.Value is Finance)
-                    {
-                        Finance dirf = (Finance)lol.Value;
-                        ListSalaire.Add(lol.Key, dirf.SetSalaireTotal());
-                    }
-
+                    Nom = kvp.Key;
                 }
             }
+            return Nom;
+        }
+
+        public string NomManageur()
+        {
+            string Nom = "Nom des manageurs présent dans l'entreprise :\n\n";
+            foreach (KeyValuePair<string, object> kvp in Emploi)
+            {
+                if (kvp.Value is Manageur)
+                {
+                    Nom += String.Format("  {0}\n", kvp.Key);
+                }
+            }
+            return Nom;
+
+        }
+
+
+
+        // Fonction SelListSalaire envoie à la classe Finance un dictionnaire des Noms et des salaire pour que l'intance de cette classe puisse renvoie la Liste des salaires //
+
+        public string SetListSalaire(string Directeur, int annee)
+        {
+            Dictionary<string, double> ListSalaire = new Dictionary<string, double>();
             try
             {
+                SetSalaire(annee);
+                foreach (KeyValuePair<string, object> lol in Emploi)
+                {
+                    {
+                        if (lol.Value is Consultant)
+                        {
+                            Consultant consul = (Consultant)lol.Value;
+                            if (consul.SetSalaireTotal() != 35000)
+                            {
+                                ListSalaire.Add(lol.Key, consul.SetSalaireTotal());
+                            }
+                            else
+                            {
+                                return "l'année que vous avez demandé n'est pas répertorier dans la base de donnée";
+                                break;
+                            }
+                            
+                        }
+                        else if (lol.Value is Manageur)
+                        {
+                            Manageur manag = (Manageur)lol.Value;
+                            ListSalaire.Add(lol.Key, manag.SetSalaireTotal());
+                        }
+                        else if (lol.Value is Directeur)
+                        {
+                            Directeur dir = (Directeur)lol.Value;
+                            ListSalaire.Add(lol.Key, dir.SetSalaireTotal());
+                        }
+                        else if (lol.Value is Directeur_RH)
+                        {
+                            Directeur_RH dirrh = (Directeur_RH)lol.Value;
+                            ListSalaire.Add(lol.Key, dirrh.SetSalaireTotal());
+                        }
+                        else if (lol.Value is Finance)
+                        {
+                            Finance dirf = (Finance)lol.Value;
+                            ListSalaire.Add(lol.Key, dirf.SetSalaireTotal());
+                        }
+
+                    }
+                }
+               
                 if (Emploi[Directeur] is Finance)
                 {
                     Finance sal = (Finance)Emploi[Directeur];
                     return sal.GetListSalaire(ListSalaire);
                 }
+
                 else
                 {
-                    return "Erreur dans la base de donnée ou dans la classe entreprise";
+                    return "erreur";
                 }
             }
             catch
             {
-                return " Erreur dans la base de donnée ou dans la classe entreprise";
+                return "l'année que vous avez demandé n'est pas répertorier dans la base de donnée";
             }
 
 
@@ -159,17 +198,17 @@ namespace travail1poo
         // Fonction SelListEntreprise envoie à la classe Directeur_RH un dictionnaire des Noms et des date pour que l'intance de cette classe puisse renvoie la Liste des Consultants //
         // travaillant dans une entreprise donnée//
 
-        public string SetListEntreprise(string entreprise)
+        public string SetListEntreprise(string entreprise, string directeur)
         {
-            Dictionary<string,string> ListConsultant = new Dictionary<string, string>();
+            Dictionary<string, string> ListConsultant = new Dictionary<string, string>();
             foreach (KeyValuePair<string, object> kvp in Emploi)
             {
-                if(kvp.Value is Consultant)
+                if (kvp.Value is Consultant)
                 {
                     Consultant consul = (Consultant)kvp.Value;
 
                     string[] e = consul.Entreprise(entreprise).Split('=');
-                    
+
                     if (e[0] != "")
                     {
                         ListConsultant.Add(consul.Nom(), e[1]);
@@ -178,20 +217,10 @@ namespace travail1poo
 
             }
 
-            string b = "";
-            foreach (KeyValuePair<string, object> kvp in Emploi)
-            {
-                if (kvp.Value is Directeur_RH)
-                {
-                    Directeur_RH dirrh = (Directeur_RH)kvp.Value;
-                    b = dirrh.Nom();
-                }
 
-            }
-
-            if (Emploi[b] is Directeur_RH)
+            if (Emploi[directeur] is Directeur_RH)
             {
-                Directeur_RH dirrh = (Directeur_RH)Emploi[b];
+                Directeur_RH dirrh = (Directeur_RH)Emploi[directeur];
                 return dirrh.GetListEntreprise(entreprise, ListConsultant);
             }
             else
@@ -206,41 +235,44 @@ namespace travail1poo
         public string SetListConsultant(string ManageurName)
         {
             List<string> ListConsultant = new List<string>();
-            if(Emploi[ManageurName] is Manageur)
+            try
             {
-                Manageur manag = (Manageur)Emploi[ManageurName];
-                List<string> a = new List<string>(manag.Esclave());
-                for (int i = 0; i < a.Count; i++)
+                if (Emploi[ManageurName] is Manageur)
                 {
-                    foreach (KeyValuePair<string, object> kvp in Emploi)
+                    Manageur manag = (Manageur)Emploi[ManageurName];
+                    List<string> a = new List<string>(manag.Esclave());
+                    for (int i = 0; i < a.Count; i++)
                     {
-                        if (kvp.Key == a[i])
+                        foreach (KeyValuePair<string, object> kvp in Emploi)
                         {
-                            Consultant consul = (Consultant)kvp.Value;
-                            ListConsultant.Add(consul.Agenda(DateTime.Today));
+                            if (kvp.Key == a[i])
+                            {
+                                Consultant consul = (Consultant)kvp.Value;
+                                ListConsultant.Add(consul.Agenda(DateTime.Today));
+                            }
                         }
                     }
+
+                    return manag.GetListConsultant(ListConsultant);
                 }
-
-                return manag.GetListConsultant(ListConsultant);
-            }
-
-            else
-            {
-                string texte = "Erreur vous n'avez pas mis le nom d'un manageur\nVoici la liste de nos manageur:\n";
-                foreach (KeyValuePair<string, string> kvp in Personnel())
+                else
                 {
-                    if (kvp.Value == "Manageur")
-                    {
-                        texte += String.Format("{0}\n", kvp.Key);
-                    }
+                    return NomManageur();
                 }
-
-                return texte;
+            }
+            catch
+            {
+                return NomManageur();
             }
         }
-
     }
 }
+
+
+
+
+     
+
+
       
         

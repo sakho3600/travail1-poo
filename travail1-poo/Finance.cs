@@ -24,10 +24,10 @@ namespace travail1poo
 
         public string GetListSalaire(Dictionary<string,double> ListSalaire)
         {
-            string Texte = "Liste des Salaire :\n";
+            string Texte = "Liste des Salaire :\n\n";
             foreach (KeyValuePair<string, double> lol in ListSalaire)
             {
-                Texte += String.Format("{0}:{1}\n", lol.Key, lol.Value);
+                Texte += String.Format("    {0}:{1}\n", lol.Key, lol.Value);
             }
             return Texte;
         }

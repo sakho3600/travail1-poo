@@ -29,10 +29,10 @@ namespace travail1poo
 
         public string GetListEntreprise(string entreprise,Dictionary<string,string> ListEntreprise)
         {
-            string texte = String.Format("{0}\n",entreprise);
+            string texte = String.Format("{0}:\n\n",entreprise);
             foreach (KeyValuePair<string, string> kvp in ListEntreprise)
             {
-                texte += String.Format("  {0}:{1}", kvp.Key, kvp.Value);
+                texte += String.Format("  {0}:{1}\n", kvp.Key, kvp.Value);
             }
             return texte;
         }

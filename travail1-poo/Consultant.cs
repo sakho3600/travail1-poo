@@ -11,7 +11,7 @@ namespace travail1poo
         public string Client;
         public string manageur;
         private double SalaireBoss;
-        public float Salaire;
+        public double Salaire;
         public int Annee;
 
         public Consultant(string Name, string Date, float Salaire,List<string> manageur, string Client) : base(Name, Date, Salaire)
@@ -49,8 +49,8 @@ namespace travail1poo
                     string nom = String.Format("{0} {1}", h[i].Name, i);
                     p.Add(c);
                     p.Add(d);
-                    k["Interne"] = p;
-                    l[nom ]= k;
+                    k["interne"] = p;
+                    l[nom]= k;
                 }
                 else
                 {
@@ -90,43 +90,54 @@ namespace travail1poo
                 }
             }
             return l;
+
         }
 
         public double SetSalaireTotal()
         {
             int CompteurMission = 0;
             int CompteurInterne=0;
-            double SalaireTotal = this.Salaire;
+            int CompteurVide = 0;
+            double SalaireTotal = 0;
             foreach (KeyValuePair<string, Dictionary<string, List<DateTime>>> kvp in HoraireParAnnnee(Annee))
             {
                 foreach (KeyValuePair<string, List<DateTime>> lol in kvp.Value)
                 {
-                    if (lol.Key is "externe")
+                    if (lol.Key == "externe")
                     {
-                        CompteurMission++;
+                        if ((lol.Value[1].Year == Annee))
+                        {
+                            CompteurMission++;
+                        }
                     }
-                    else if (lol.Key is "interne")
+                    else if (lol.Key == "interne")
                     {
                         if (lol.Value[1].Year == Annee)
                         {
                             TimeSpan sub = lol.Value[1] - lol.Value[0];
-                            string a = String.Format("{}", sub);
-                            CompteurInterne += Int32.Parse(a);
+                            string[] a = String.Format("{0}", sub).Split('.');
+                            CompteurInterne += Int32.Parse(a[0]);
                         }
-                        else
+                        else if(lol.Value[1].Year != Annee && lol.Value[0].Year==Annee)
                         {
                             string b = String.Format("31/12/{0}", Annee);
-                            lol.Value[1] = Convert.ToDateTime(b);
-                            TimeSpan sub = lol.Value[1] - lol.Value[0];
-                            string a = String.Format("{}", sub);
-                            CompteurInterne += Int32.Parse(a);
+                            TimeSpan sub = Convert.ToDateTime(b) - lol.Value[0];
+                            string[] c = String.Format("{0}", sub).Split('.');
+                            CompteurInterne += Int32.Parse(c[0]);
                         }
                     }
+                    
+
                 }
             }
-            SalaireTotal += CompteurMission * 250 + (CompteurInterne * ((0.01 * SalaireBoss) - 10));
-            return SalaireTotal;
-        }
+
+                SalaireTotal = this.Salaire+(CompteurMission * 250) + (CompteurInterne * ((0.01 * SalaireBoss) - 10));
+                return SalaireTotal;
+
+
+                
+            }
+
 
         public string Agenda(DateTime dateTime)
         {
