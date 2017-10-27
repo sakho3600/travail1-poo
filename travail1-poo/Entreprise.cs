@@ -53,6 +53,26 @@ namespace travail1poo
             }
             return ListePersonnel;
         }
+        public string Poste(string Nom)
+        {
+            string poste = "";
+            foreach (KeyValuePair<string, string> kvp in Personnel())
+            {
+                if (kvp.Key == Nom)
+                {
+                     poste += kvp.Value;
+                }
+            }
+            if (poste == "")
+            {
+                return "Vous ne travaillez pas chez nous";
+            }
+            else
+            {
+                return poste;
+            }
+
+        }
 
         // Fonction SetSalaire envoie le salaire des manageur à leurs consultants pour que ceux-ci puisse calculer leur salaire //
 
