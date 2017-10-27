@@ -7,19 +7,16 @@ namespace travail1poo
 {
     class Consultant : Employé
     {
-        //public Societe s;
         public string Client;
         public string manageur;
         private double SalaireBoss;
-        public double Salaire;
         public int Annee;
 
-        public Consultant(string Name, string Date, float Salaire,List<string> manageur, string Client) : base(Name, Date, Salaire)
+        public Consultant(string Name, string Date, double Salaire,List<string> manageur, string Client) : base(Name, Date, Salaire)
         {
             this.Name = Name;
             this.Client = Client;
             this.manageur = manageur[0];
-            this.Salaire = Salaire;
         }
 
         public string Poste()
@@ -171,9 +168,5 @@ namespace travail1poo
             return tot;
         }
 
-        public override string ToString()
-        {
-            return string.Format("{0}\n{1}\n{2}\n{3}", this.Name, this.Date, this.Salaire,this.Client);
-        }
     }
 }

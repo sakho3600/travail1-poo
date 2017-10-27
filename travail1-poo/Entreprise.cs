@@ -12,16 +12,10 @@ namespace travail1poo
             this.Emploi = ListeEmploi;
         }
 
-        // Fonction Encode permet de rejouter un employé dans le dictionnaire Emploi//
-
-        public void Encode(string a, object b)
-        {
-            this.Emploi.Add(a, b);
-        }
 
         // Fonction personnel revoie un dictionnaire des noms des employés et leurs postes //
 
-        public Dictionary<string, string> Personnel()
+        private Dictionary<string, string> Personnel()
         {
             Dictionary<string, string> ListePersonnel = new Dictionary<string, string>();
 
@@ -62,7 +56,7 @@ namespace travail1poo
 
         // Fonction SetSalaire envoie le salaire des manageur à leurs consultants pour que ceux-ci puisse calculer leur salaire //
 
-        public void SetSalaire(int annee)
+        private void SetSalaire(int annee)
         {
             foreach (KeyValuePair<string, object> kvp in Emploi)
             {
@@ -85,7 +79,7 @@ namespace travail1poo
 
         // Fonctions qui renvoient un string de Nom //
 
-        public string DirecteurFinance()
+        private string DirecteurFinance()
         {
             string Nom = "";
             foreach (KeyValuePair<string, object> kvp in Emploi)
@@ -98,7 +92,7 @@ namespace travail1poo
             return Nom;
         }
 
-        public string DirecteurRH()
+        private string DirecteurRH()
         {
             string Nom = "";
             foreach (KeyValuePair<string, object> kvp in Emploi)
@@ -111,7 +105,7 @@ namespace travail1poo
             return Nom;
         }
 
-        public string NomManageur()
+        private string NomManageur()
         {
             string Nom = "Nom des manageurs présent dans l'entreprise :\n\n";
             foreach (KeyValuePair<string, object> kvp in Emploi)
@@ -129,7 +123,7 @@ namespace travail1poo
 
         // Fonction SelListSalaire envoie à la classe Finance un dictionnaire des Noms et des salaire pour que l'intance de cette classe puisse renvoie la Liste des salaires //
 
-        public string SetListSalaire(string Directeur, int annee)
+        public string SetListSalaire(int annee)
         {
             Dictionary<string, double> ListSalaire = new Dictionary<string, double>();
             try
@@ -176,9 +170,9 @@ namespace travail1poo
                     }
                 }
                
-                if (Emploi[Directeur] is Finance)
+                if (Emploi[DirecteurFinance()] is Finance)
                 {
-                    Finance sal = (Finance)Emploi[Directeur];
+                    Finance sal = (Finance)Emploi[DirecteurFinance()];
                     return sal.GetListSalaire(ListSalaire);
                 }
 
@@ -198,14 +192,17 @@ namespace travail1poo
         // Fonction SelListEntreprise envoie à la classe Directeur_RH un dictionnaire des Noms et des date pour que l'intance de cette classe puisse renvoie la Liste des Consultants //
         // travaillant dans une entreprise donnée//
 
-        public string SetListEntreprise(string entreprise, string directeur)
+        public string SetListEntreprise(string entreprise)
         {
+            int count = 0;
+            int countconsul = 0;
             Dictionary<string, string> ListConsultant = new Dictionary<string, string>();
             foreach (KeyValuePair<string, object> kvp in Emploi)
             {
                 if (kvp.Value is Consultant)
                 {
                     Consultant consul = (Consultant)kvp.Value;
+                    countconsul++;
 
                     string[] e = consul.Entreprise(entreprise).Split('=');
 
@@ -213,19 +210,29 @@ namespace travail1poo
                     {
                         ListConsultant.Add(consul.Nom(), e[1]);
                     }
+                    else
+                    {
+                        count++;
+                    }
                 }
 
             }
 
-
-            if (Emploi[directeur] is Directeur_RH)
+            if (count == countconsul)
             {
-                Directeur_RH dirrh = (Directeur_RH)Emploi[directeur];
-                return dirrh.GetListEntreprise(entreprise, ListConsultant);
+                return "Nous n'avons aucun consultant qui a travaillé dans cette entreprise";
             }
             else
             {
-                return "erreur";
+                if (Emploi[DirecteurRH()] is Directeur_RH)
+                {
+                    Directeur_RH dirrh = (Directeur_RH)Emploi[DirecteurRH()];
+                    return dirrh.GetListEntreprise(entreprise, ListConsultant);
+                }
+                else
+                {
+                    return "erreur";
+                }
             }
         }
 

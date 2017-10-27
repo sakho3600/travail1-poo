@@ -5,21 +5,10 @@ namespace travail1poo
 {
     class Finance : Directeur
     {
-        public new string fonction;
 
-        public Finance(string Name, string Date, float Salaire, List<string> fonction) : base(Name, Date, Salaire, fonction)
-        {
-            this.fonction = fonction[0];
-        }
 
-        public new string Poste()
+        public Finance(string Name, string Date, double Salaire, List<string> fonction) : base(Name, Date, Salaire, fonction)
         {
-            return String.Format("Directeur {0}", fonction);
-        }
-
-        public string Nom()
-        {
-			return this.Name;
         }
 
         public string GetListSalaire(Dictionary<string,double> ListSalaire)

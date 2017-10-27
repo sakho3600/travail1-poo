@@ -10,7 +10,7 @@ namespace gestion
         public string Poste { get; set; }
         public string Name { get; set; }
         public string Date { get; set; }
-        public float Salaire { get; set; }
+        public double Salaire { get; set; }
         public List<string> Associe { get; set; }
     }
 
@@ -24,10 +24,10 @@ namespace gestion
     class MainClass
     {
         public static void Main(string[] args)
-        {
-            Dictionary<string, string> Ad = Traduction(LectureName(), LectureAdress());
+        { 
             Entreprise Ecam = new Entreprise(Emploi());
-            Affichage.Affiche(Ecam);
+            Affichage cons=new Affichage(Ecam);
+            cons.Affiche();
 			Console.ReadKey();
         }
         // Pas touche au variable Associe

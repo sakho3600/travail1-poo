@@ -8,13 +8,17 @@ namespace travail1poo
 {
     class Affichage
     {
-        public static void Affiche(Entreprise societe)
+        public static Entreprise societe;
+        public Affichage(Entreprise entreprise)
         {
-            Menu(societe);
+            societe =entreprise;
+        }
+        public void Affiche()
+        {
+            Menu();
             
         }
-
-        public static void Menu(Entreprise societe)
+        private static void Menu()
         {
             Console.WriteLine("Gestionnaire d'employés.\r\nVeuillez choisir un rapport à générer:\r\n");
             Console.WriteLine("1. Générer un rapport pour le manager.");
@@ -40,19 +44,19 @@ namespace travail1poo
             switch (choice)
             {
                 case 1:
-                    cas1(societe);
+                    cas1();
                     break;
                 case 2:
-                    cas2(societe);
+                    cas2();
                     break;
                 case 3:
-                    cas3(societe);
+                    cas3();
                     break;
             }
-            retour(societe);
+            retour();
         }
 
-        public static void cas1(Entreprise societe)
+        private static void cas1()
         {
             try
             {
@@ -63,29 +67,29 @@ namespace travail1poo
             }
             catch
             {
-                Console.WriteLine("Veillez un Nom de Manageur valide\nExemple:Maxime Bourguignon");
-                cas1(societe);
+                Console.WriteLine("Veillez un Nom de Manageur valide\nExemple:Google");
+                cas2();
 
             }
         }
 
-        public static void cas2(Entreprise societe)
+        private static void cas2()
         {
             try
             {
                 Console.WriteLine("Choisissez l'entreprise dont vous voulez voir la liste de nos consultant qui y ont travaillé:");
                 string response2 = Console.ReadLine();
                 Console.Clear();
-                Console.WriteLine(societe.SetListEntreprise(response2, societe.DirecteurRH()));
+                Console.WriteLine(societe.SetListEntreprise(response2));
             }
             catch
             {
                 Console.WriteLine("Veillez un Nom d'entreprise valide\nExemple:Google");
-                cas2(societe);
+                cas2();
             }
         }
 
-        public static void cas3(Entreprise societe)
+        private static void cas3()
         {
 
             Console.WriteLine("Choisissez une Année:");
@@ -95,22 +99,22 @@ namespace travail1poo
                 int choise = 0;
                 choise = Int16.Parse(response3);
                 Console.Clear();
-                Console.WriteLine(societe.SetListSalaire(societe.DirecteurFinance(), choise));
+                Console.WriteLine(societe.SetListSalaire(choise));
             }
             catch
             {
                 Console.WriteLine("Veillez rentrer une année valide\nExemple:2017");
-                cas3(societe);
+                cas3();
             }
         }
-        public static void retour(Entreprise societe)
+        private static void retour()
         {
             Console.WriteLine("Voulez vous quittez l'interface ? (y/n)");
             string response4 = Console.ReadLine();
             if (response4 == "n")
             {
                 Console.Clear();
-                Menu(societe);
+                Menu();
             }
             else if (response4 == "y")
             {
@@ -120,7 +124,7 @@ namespace travail1poo
             else
             {
                 Console.WriteLine("Vous n'avez pas effectué la bonne commande");
-                retour(societe);
+                retour();
             }
         }
 

@@ -5,18 +5,16 @@ namespace travail1poo
 {
     class Manageur : Employé
     {
-        public List<string> Consult;
-        private float Salaire;
+        private List<string> Consult;
 
-        public Manageur(string Name, string Date, float Salaire, List<string> consultant) : base(Name, Date, Salaire)
+        public Manageur(string Name, string Date, double Salaire, List<string> consultant) : base(Name, Date, Salaire)
         {
             this.Consult = consultant;
-            this.Salaire = Salaire;
         }
 
         public double SetSalaireTotal()
         {
-            float Total = this.Salaire + (500 * this.Consult.Count);
+            double Total = this.Salaire + (500 * this.Consult.Count);
             return Total;
         }
 

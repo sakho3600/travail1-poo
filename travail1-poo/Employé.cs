@@ -12,23 +12,14 @@ namespace travail1poo
     {
         public string Name;
         public string Date;
-        public float Salaire;
+        public double Salaire;
 
-        public Employé(string a, string b, float c)
+        public Employé(string a, string b, double c)
         {
             this.Name = a;
             this.Date = b;
             this.Salaire = c;
         }
-
-        public string Encode()
-        {
-            return string.Format("{0}", Name);
-        }
         
-        public override string ToString()
-        {
-            return string.Format("{0}\n{1}\n{2}",this.Name,this.Date,this.Salaire);
-        }
     }
 }

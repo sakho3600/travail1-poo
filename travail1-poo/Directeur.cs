@@ -7,16 +7,21 @@ namespace travail1poo
     {
 
         public string fonction;
-        public double Salaire;
 
-        public Directeur(string Name, string Date, float Salaire, List<string> fonction) : base(Name, Date, Salaire)
+        public Directeur(string Name, string Date, double Salaire, List<string> fonction) : base(Name, Date, Salaire)
         {
             this.fonction = fonction[0];
             this.Salaire = Salaire;
+            this.Name = Name;
         }
         public string Poste()
         {
             return String.Format("Directeur {0}",fonction);
+        }
+
+        public string Nom()
+        {
+            return this.Name;
         }
 
         public double SetSalaireTotal()
